@@ -106,14 +106,18 @@
         {/if}
       </div>
     </div>
-    <div class="task-manager-header">
+        <div class="task-manager-header">
           <h2>Task</h2>
           <h2>Start Time</h2>
           <h2>Repeat</h2>
+          <!-- <h2>Repeat Times</h2> -->
+          <!-- <h2>Task</h
           <!-- <h2>Task</h2> -->
           <h2>Job</h2>
+          
           <h2>Edit</h2>
-          <!-- <h2>Action</h2> -->
+           <h2>Action</h2>
+         
       </div>
       <div class="task-manager-list">
             <!-- Displaying Tasks -->
@@ -144,17 +148,21 @@
                         
                       </select> 
                   </div>
-                   
-                  <div class="task-dropdown">
-                    
-
-                     <button on:click={() => deleteTask(index)} class="delete-task-button"><i class="fa-solid fa-trash-can"></i></button>
+                  
+                  <div class="edit">
+                    <button on:click={() => deleteTask(index)} class="delete-task-button"><i class="fa-solid fa-trash-can"></i></button>
                     <button on:click={() => editTask(index)} class="edit-task-button"><i class="fa-solid fa-pen-to-square"></i></button>
-
                   </div>
+
+                 <div class="run-task">
+                  <button>Run Task</button>
+                 </div>
+
                 </div>
+                
             {/each}
         </div>
+         
 </div>
 
 
@@ -199,7 +207,7 @@
 
   .task-manager-header {
       display: grid; /* Use grid for more precise control */
-  grid-template-columns: repeat(5, 1fr); /* Create 4 equally spaced columns */
+  grid-template-columns: repeat(6, 0.5fr); /* Create 4 equally spaced columns */
   background-color: rgb(190, 196, 203);
   margin-left: 10px;
   margin-right: 10px;
@@ -209,46 +217,56 @@
   }
 
   
-  .task-manager-list{
-   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  gap: 10px;
-  }
 
   .task-manager-list-item {
-    display: grid; /* Use grid for better alignment */
-  grid-template-columns: repeat(5, 1fr); /* Create 4 equally spaced columns */
+    display: grid; 
+  grid-template-columns: repeat(6, 0.5fr); 
   align-items: center;
   padding: 8px;
   font-weight: normal;
   border-bottom: 1px solid #ccc;
   font-size: 14px;
+  
+
   }
 
  .delete-task-button {
     background-color: #ff6347;
   color: white;
   border: none;
-  padding: 8px 16px;
+ 
   border-radius: 4px;
   cursor: pointer;
   width: fit-content;
-  transition: background-color 0.3s ease; /* Smooth transition on hover */
+  transition: background-color 0.3s ease; 
+  padding: 10px;
+  margin-right: 5px;
+  
 } 
- .edit-task-button {
+.edit-task-button {
     background-color: #ff6347;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: fit-content;
-  transition: background-color 0.3s ease; /* Smooth transition on hover */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+    
+    transition: background-color 0.3s ease;  /* Smooth transition on hover */
 }
+.edit {
+    position: relative;
+    display: inline-block;
+  }
+
+ 
 
   .delete-task-button:hover {
     background-color: #ff7f50;
   } 
+  .edit-task-button:hover {
+    background-color: #ff7f50;
+  } 
+
   .modal {
     position: fixed;
     top: 50%;
@@ -256,29 +274,41 @@
     transform: translate(-50%, -50%);
     width: 40%;
     height: 40%;
-    /* Additional styling for the modal */
-    /* Define width, background, padding, etc. */
+    
   }
-  /* Style the dropdown and button as needed */
   
-  .job-dropdown {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+  
+.job-dropdown {
+    /* Include any other necessary styles */
+    position: relative;
+    display: inline-block;
   }
-.task-dropdown {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-
 
   select {
     font-weight: bold;
     padding: 8px;
     border-radius: 4px;
     border: 2px solid #ccc;
-    margin-right: 10px;
+   
+  }
+.run-task {
+    display: flex;
+    justify-content:flex-start;
+    align-items: flex-start;
+  }
+  .run-task button {
+    /* Adjust button styles as needed */
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+  }
+
+  .run-task button:hover {
+    background-color: #005f73;
   }
 
   
