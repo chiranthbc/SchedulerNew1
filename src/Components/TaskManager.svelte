@@ -25,7 +25,7 @@
     repeat,
     repeatTimes,
     selectedJob: '/job',
-    selectedatask:'/task',
+    
   };
 
     // @ts-ignore
@@ -93,27 +93,41 @@
       console.log('Selected Job:', selectedJobValue);
     }
   }
+
+  function handleRunTask() {
+    console.log("Tasks:", tasks); // Log the tasks array
+  
+  }
 </script>
 
 
 <div class="task-manager">
     <div class="header">
       <h1><i class="fa-solid fa-calendar-days"></i> Task Lists</h1>
-      <button on:click={() => (formModal = true)} class="add-task-button">Add New Task</button>
+      <div class="header-buttons">
+          <button on:click={() => (formModal = true)} class="add-task-button">Add New Task</button>
+          <button>Task Job History</button>
+      </div>
       <div class="modal">
         {#if formModal}
           <ModalForm on:submit={handleFormSubmit} />
         {/if}
       </div>
     </div>
+
+     {#if !formModal}
     <div class="task-manager-header">
           <h2>Task</h2>
           <h2>Start Time</h2>
           <h2>Repeat</h2>
+          <!-- <h2>Repeat Times</h2> -->
+          <!-- <h2>Task</h
           <!-- <h2>Task</h2> -->
           <h2>Job</h2>
+          
           <h2>Edit</h2>
-          <!-- <h2>Action</h2> -->
+           <h2>Action</h2>
+         
       </div>
       <div class="task-manager-list">
             <!-- Displaying Tasks -->
@@ -144,17 +158,21 @@
                         
                       </select> 
                   </div>
-                   
-                  <div class="task-dropdown">
-                    
-
-                     <button on:click={() => deleteTask(index)} class="delete-task-button"><i class="fa-solid fa-trash-can"></i></button>
+                  
+                  <div class="edit">
+                    <button on:click={() => deleteTask(index)} class="delete-task-button"><i class="fa-solid fa-trash-can"></i></button>
                     <button on:click={() => editTask(index)} class="edit-task-button"><i class="fa-solid fa-pen-to-square"></i></button>
-
                   </div>
+
+                 <div class="run-task">
+                  <button on:click={handleRunTask}>Run Task</button>
+                 </div>
+
                 </div>
+                
             {/each}
         </div>
+    {/if}     
 </div>
 
 
@@ -186,20 +204,29 @@
   .header h1 i {
     margin-right: 5px;
   }
+.header-buttons {
+  display: flex;
+  gap: 10px;
+}
+.header-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #3498db;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  .add-task-button {
-    background-color: black;
-    color: red;
-    border: 1px solid red;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: fit-content;
-  }
+.header-buttons button:hover {
+  background-color: #2980b9;
+}
+
 
   .task-manager-header {
       display: grid; /* Use grid for more precise control */
-  grid-template-columns: repeat(5, 1fr); /* Create 4 equally spaced columns */
+  grid-template-columns: repeat(6, 0.5fr); /* Create 4 equally spaced columns */
   background-color: rgb(190, 196, 203);
   margin-left: 10px;
   margin-right: 10px;
@@ -209,46 +236,56 @@
   }
 
   
-  .task-manager-list{
-   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  gap: 10px;
-  }
 
   .task-manager-list-item {
-    display: grid; /* Use grid for better alignment */
-  grid-template-columns: repeat(5, 1fr); /* Create 4 equally spaced columns */
+    display: grid; 
+  grid-template-columns: repeat(6, 0.5fr); 
   align-items: center;
   padding: 8px;
   font-weight: normal;
   border-bottom: 1px solid #ccc;
   font-size: 14px;
+  
+
   }
 
  .delete-task-button {
     background-color: #ff6347;
   color: white;
   border: none;
-  padding: 8px 16px;
+ 
   border-radius: 4px;
   cursor: pointer;
   width: fit-content;
-  transition: background-color 0.3s ease; /* Smooth transition on hover */
+  transition: background-color 0.3s ease; 
+  padding: 10px;
+  margin-right: 5px;
+  
 } 
- .edit-task-button {
+.edit-task-button {
     background-color: #ff6347;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  width: fit-content;
-  transition: background-color 0.3s ease; /* Smooth transition on hover */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+    
+    transition: background-color 0.3s ease;  /* Smooth transition on hover */
 }
+.edit {
+    position: relative;
+    display: inline-block;
+  }
+
+ 
 
   .delete-task-button:hover {
     background-color: #ff7f50;
   } 
+  .edit-task-button:hover {
+    background-color: #ff7f50;
+  } 
+
   .modal {
     position: fixed;
     top: 50%;
@@ -256,29 +293,46 @@
     transform: translate(-50%, -50%);
     width: 40%;
     height: 40%;
-    /* Additional styling for the modal */
-    /* Define width, background, padding, etc. */
+    
   }
-  /* Style the dropdown and button as needed */
   
-  .job-dropdown {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+  
+.job-dropdown {
+    /* Include any other necessary styles */
+    position: relative;
+    display: inline-block;
   }
-.task-dropdown {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-
 
   select {
     font-weight: bold;
     padding: 8px;
     border-radius: 4px;
     border: 2px solid #ccc;
-    margin-right: 10px;
+    cursor: pointer;
+  }
+  select:hover {
+  /* Adjust the styles for the dropdown when hovered */
+  border-color: #666;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.run-task {
+    display: flex;
+    justify-content:flex-start;
+    align-items: flex-start;
+  }
+  .run-task button {
+    /* Adjust button styles as needed */
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+  }
+
+  .run-task button:hover {
+    background-color: #005f73;
   }
 
   
