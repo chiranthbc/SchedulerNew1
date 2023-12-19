@@ -23,7 +23,7 @@
   <form on:submit|preventDefault={handleSubmit}>
     <h3>New Task</h3>
     <label for="task">Task</label><br>
-    <input type="text" name="task" bind:value={values.task}><br>
+    <input type="text" name="task" bind:value={values.task}><br><br>
     <label for="repeat">Repeat:</label>
 
     <label for="OnlyThisTime">
@@ -39,7 +39,7 @@
     <label for="Weekly">
       <input type="radio" name="repeat" value="Weekly" bind:group={values.repeat}>
       Weekly
-    </label><br>
+    </label><br><br>
 
     <label for="StartTime">Start Time</label>
     <input type="datetime-local" name="Start Time" bind:value={values.startTime}>
@@ -55,7 +55,7 @@
 <style>
   .modal-form {
     padding: 20px;
-    background-color: #f8f8f8;
+    background-color:  #f2f2f2;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
@@ -64,14 +64,14 @@
   .modal-form h3 {
     margin-top: 0;
     font-size: 24px;
-    color: #333;
+    color: #0a0a0a;
   }
 
   .modal-form label {
     display: inline-block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #555;
+    color: #0a0a0a;
   }
 
   .modal-form input[type="text"],
